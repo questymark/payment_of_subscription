@@ -1,0 +1,11 @@
+.payment-method {
+  display: table;
+  margin-bottom: 20px;
+}
+.payment-method__inner {
+  height: 150px;
+  display: table-cell;
+  vertical-align: middle;
+  border: 1px dashed #999999;
+  text-align: center;
+}
