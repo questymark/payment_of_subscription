@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PaymentMethod from './PaymentMethod';
-import SubscriptionPeriod from './SubscriptionPeriod';
 
 class App extends Component {
   constructor(props, context) {
@@ -58,56 +56,73 @@ class App extends Component {
     })
   }
 
-  render() {
+  render() { 
     return (
       <div className="app">
         <div className={this.state.selectedPaymentMethod !== "" ? "payment-method-wrp payment-method-wrp_selected" : "payment-method-wrp"}>
           <div className="container">
             <h2>Выберите способ оплаты</h2>
             <div className="row">
-              <PaymentMethod 
-                selectedPaymentMethod={this.state.selectedPaymentMethod}
-                selectPaymentMethod={this.selectPaymentMethod.bind(this, "Visa")}
-                label="Visa"
-                name="Visa"
-              />
-              <PaymentMethod
-                selectedPaymentMethod={this.state.selectedPaymentMethod}
-                selectPaymentMethod={this.selectPaymentMethod.bind(this, "Yandex")}
-                label="Yandex"
-                name="Яндекс-деньги"
-              />
-              <PaymentMethod
-                selectedPaymentMethod={this.state.selectedPaymentMethod}
-                selectPaymentMethod={this.selectPaymentMethod.bind(this, "PayPal")}
-                label="PayPal"
-                name="PayPal"
-              />
-              <PaymentMethod
-                selectedPaymentMethod={this.state.selectedPaymentMethod}
-                selectPaymentMethod={this.selectPaymentMethod.bind(this, "WebMoney")}
-                label="WebMoney"
-                name="WebMoney"
-              />
-              <PaymentMethod
-                selectedPaymentMethod={this.state.selectedPaymentMethod}
-                selectPaymentMethod={this.selectPaymentMethod.bind(this, "SMS")}
-                label="SMS"
-                name="SMS"
-                descr="Только для России"
-              />
-              <PaymentMethod
-                selectedPaymentMethod={this.state.selectedPaymentMethod}
-                selectPaymentMethod={this.selectPaymentMethod.bind(this, "Qiwi")}
-                label="Qiwi"
-                name="Qiwi"
-              />
-              <PaymentMethod
-                selectedPaymentMethod={this.state.selectedPaymentMethod}
-                selectPaymentMethod={this.selectPaymentMethod.bind(this, "Present")}
-                label="Present"
-                name="Подарочный код"
-              />
+              <div className={this.state.selectedPaymentMethod === "Visa" ?
+                            "col-md-3 col-sm-3 col-xs-12 payment-method payment-method_selected" :
+                            "col-md-3 col-sm-3 col-xs-12 payment-method"}
+                   onClick={this.selectPaymentMethod.bind(this, "Visa")}>
+                <div className="payment-method__inner">
+                  <h4 className="payment-method__title">Visa</h4>
+                </div>
+              </div>
+              <div className={this.state.selectedPaymentMethod === "Yandex" ?
+                            "col-md-3 col-sm-3 col-xs-12 payment-method payment-method_selected" :
+                            "col-md-3 col-sm-3 col-xs-12 payment-method"}
+                   onClick={this.selectPaymentMethod.bind(this, "Yandex")}>
+                <div className="payment-method__inner">
+                  <h4 className="payment-method__title">Яндекс-деньги</h4>
+                </div>
+              </div>
+              <div className={this.state.selectedPaymentMethod === "PayPal" ?
+                            "col-md-3 col-sm-3 col-xs-12 payment-method payment-method_selected" :
+                            "col-md-3 col-sm-3 col-xs-12 payment-method"}
+                   onClick={this.selectPaymentMethod.bind(this, "PayPal")}>
+                <div className="payment-method__inner">
+                  <h4 className="payment-method__title">PayPal</h4>
+                </div>
+              </div>
+              <div className={this.state.selectedPaymentMethod === "WebMoney" ?
+                            "col-md-3 col-sm-3 col-xs-12 payment-method payment-method_selected" :
+                            "col-md-3 col-sm-3 col-xs-12 payment-method"}
+                   onClick={this.selectPaymentMethod.bind(this, "WebMoney")}>
+                <div className="payment-method__inner">
+                  <h4 className="payment-method__title">WebMoney</h4>
+                </div>
+              </div>
+              <div className={this.state.selectedPaymentMethod === "SMS" ?
+                            "col-md-3 col-sm-3 col-xs-12 payment-method payment-method_selected" :
+                            "col-md-3 col-sm-3 col-xs-12 payment-method"}
+                   onClick={this.selectPaymentMethod.bind(this, "SMS")}>
+                <div className="payment-method__inner">
+                  <h4 className="payment-method__title">SMS</h4>
+                  <span className="payment-method__descr">Только для России</span>
+                </div>
+              </div>
+              <div className={this.state.selectedPaymentMethod === "Qiwi" ?
+                            "col-md-3 col-sm-3 col-xs-12 payment-method payment-method_selected" :
+                            "col-md-3 col-sm-3 col-xs-12 payment-method"}
+                   onClick={this.selectPaymentMethod.bind(this, "Qiwi")}>
+                <div className="payment-method__inner">
+                  <h4 className="payment-method__title">Qiwi</h4>
+                </div>
+              </div>
+              <div className=
+                     {this.state.selectedSubscriptionForPresent ?
+                     "col-md-3 col-sm-3 col-xs-12 payment-method payment-method_disabled" :
+                     this.state.selectedPaymentMethod === "Present" ?
+                              "col-md-3 col-sm-3 col-xs-12 payment-method payment-method_selected" :
+                              "col-md-3 col-sm-3 col-xs-12 payment-method"}
+                   onClick={this.state.selectedSubscriptionForPresent ? '' : this.selectPaymentMethod.bind(this, "Present")}>
+                <div className="payment-method__inner">
+                  <h4 className="payment-method__title">Подарочный код</h4>
+                </div>
+              </div>
             </div>
             <div className={this.state.selectedSubscriptionForPresentVisible ? "form-check" : "hidden"}>
               <label className="form-check-label">
@@ -131,27 +146,48 @@ class App extends Component {
           <div className="container">
             <h2>Выберите срок оплаты</h2>
             <div className="row">
-              <SubscriptionPeriod
-                selectedSubscriptionPeriod={this.state.selectedSubscriptionPeriod}
-                period={2}
-                selectSubscriptionPerion={this.selectSubscriptionPerion.bind(this, 2, 2880)}
-                textYear="2 года: 2880 руб."
-                textMonth="120 руб. в месяц"
-              />
-              <SubscriptionPeriod
-                selectedSubscriptionPeriod={this.state.selectedSubscriptionPeriod}
-                period={1}
-                selectSubscriptionPerion={this.selectSubscriptionPerion.bind(this, 1, 1500)}
-                textYear="1 год: 1500 руб."
-                textMonth="125 руб. в месяц"
-              />
-              <SubscriptionPeriod
-                selectedSubscriptionPeriod={this.state.selectedSubscriptionPeriod}
-                period={0.5}
-                selectSubscriptionPerion={this.selectSubscriptionPerion.bind(this, 0.5, 780)}
-                textYear="6 месяцев: 780 руб."
-                textMonth="130 руб. в месяц"
-              />
+              <div className={this.state.selectedSubscriptionPeriod === 2 ?
+                              "col-md-4 col-sm-4 col-xs-12 subscription-period subscription-period_selected" :
+                              "col-md-4 col-sm-4 col-xs-12 subscription-period"}
+                   onClick={this.selectSubscriptionPerion.bind(this, 2, 2880)}
+              >
+                <div className="subscription-period__inner">
+                  <div className="subscription-period__total">
+                    2 года: 2880 руб.
+                  </div>
+                  <div className="subscription-period__month">
+                    120 руб. в месяц
+                  </div>
+                </div>
+              </div>
+              <div className={this.state.selectedSubscriptionPeriod === 1 ?
+                              "col-md-4 col-sm-4 col-xs-12 subscription-period subscription-period_selected" :
+                              "col-md-4 col-sm-4 col-xs-12 subscription-period"}
+                   onClick={this.selectSubscriptionPerion.bind(this, 1, 1500)}
+              >
+                <div className="subscription-period__inner">
+                  <div className="subscription-period__total">
+                    1 год: 1500 руб.
+                  </div>
+                  <div className="subscription-period__month">
+                    125 руб. в месяц
+                  </div>
+                </div>
+              </div>
+              <div className={this.state.selectedSubscriptionPeriod === 0.5 ?
+                              "col-md-4 col-sm-4 col-xs-12 subscription-period subscription-period_selected" :
+                              "col-md-4 col-sm-4 col-xs-12 subscription-period"}
+                   onClick={this.selectSubscriptionPerion.bind(this, 0.5, 780)}
+              >
+                <div className="subscription-period__inner">
+                  <div className="subscription-period__total">
+                    6 месяцев: 780 руб.
+                  </div>
+                  <div className="subscription-period__month">
+                    130 руб. в месяц
+                  </div>
+                </div>
+              </div>
             </div>
             <div className={this.state.selectedPaymentMethod !== "WebMoney" &&
                             this.state.selectedPaymentMethod !== "Qiwi" &&
@@ -178,14 +214,14 @@ class App extends Component {
               {this.state.selectedSubscriptionPeriod == 1 ?
                 '1 год' :
                 this.state.selectedSubscriptionPeriod == 2 ?
-                '2 года' :
-                '6 месяцев'})</h2>
+                  '2 года' :
+                  '6 месяцев'})</h2>
             <h1>{this.state.costOfSelectedSubscriptionPeriod}&nbsp;
               {this.state.subscriptionDiscount ?
-              this.state.selectedSubscriptionPeriod === 2 ?
-                `+ ${150 * 4} = ${2880 + 150 * 4}` :
-                this.state.selectedSubscriptionPeriod === 1 ? `+ ${150 * 2} = ${150 * 2 + 1500}` :
-                `+ ${150} = ${780 + 150}` : ""
+                this.state.selectedSubscriptionPeriod === 2 ?
+                  `+ ${150 * 4} = ${2880 + 150 * 4}` :
+                  this.state.selectedSubscriptionPeriod === 1 ? `+ ${150 * 2} = ${150 * 2 + 1500}` :
+                    `+ ${150} = ${780 + 150}` : ""
               }&nbsp;руб.</h1>
             {this.state.automaticRenewals ? <div>Далее 120 руб. в месяц</div> : ""}
             <label className="form-check-label">
@@ -202,7 +238,7 @@ class App extends Component {
         </div>
         <div className={this.state.selectedPaymentMethod ? "payment-btn" : "hidden"}>
           <div className="container">
-            <button className="btn btn-primary" disabled={!this.state.selectedSubscriptionPeriod}>Оплатить</button> 
+            <button className="btn btn-primary" disabled={!this.state.selectedSubscriptionPeriod}>Оплатить</button>
           </div>
         </div>
       </div>
